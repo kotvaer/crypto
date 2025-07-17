@@ -47,12 +47,12 @@ def initialize_exchange():
             exchange = None
     return exchange
 
-def fetch_ohlcv(symbol):
+def fetch_ohlcv(symbol, timeframe=OHLCV_TIMEFRAME):
     exchange = initialize_exchange()
     if exchange is None:
         return None
     try:
-        ohlcv = exchange.fetch_ohlcv(symbol, OHLCV_TIMEFRAME, limit=OHLCV_LIMIT)
+        ohlcv = exchange.fetch_ohlcv(symbol, timeframe, limit=OHLCV_LIMIT)
         return ohlcv
     except ccxt.NetworkError as e:
         print(f"Network error fetching OHLCV for {symbol}: {e}. Retrying...")
